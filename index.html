@@ -9,284 +9,70 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
         
         :root {
-            --bg-color: #121212;
-            --primary-text-color: #e0e0e0;
-            --secondary-text-color: #b0b0b0;
-            --input-bg: #1e1e1e;
-            --input-border: #333;
-            --button-bg: #007bff;
-            --button-hover-bg: #0056b3;
-            --yes-color: #28a745;
-            --no-color: #dc3545;
-            --party-color: #ffc107;
-            --font-family: 'Inter', sans-serif;
+            --bg-color: #121212; --primary-text-color: #e0e0e0; --secondary-text-color: #b0b0b0; --input-bg: #1e1e1e; --input-border: #333; --button-bg: #007bff; --button-hover-bg: #0056b3; --yes-color: #28a745; --no-color: #dc3545; --party-color: #ffc107; --font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--primary-text-color);
-            font-family: var(--font-family);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            transition: background-color 0.5s ease;
+            background-color: var(--bg-color); color: var(--primary-text-color); font-family: var(--font-family); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; text-align: center; transition: background-color 0.5s ease;
         }
         
         body.party-mode {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	        background-size: 400% 400%;
-	        animation: gradient 15s ease infinite;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); background-size: 400% 400%; animation: gradient 15s ease infinite;
         }
 
-        @keyframes gradient {
-	        0% { background-position: 0% 50%; }
-	        50% { background-position: 100% 50%; }
-	        100% { background-position: 0% 50%; }
-        }
+        @keyframes gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        #app-container {
-            width: 90%;
-            max-width: 600px;
-            padding: 20px;
-            position: relative;
-        }
-        
-        #initial-screen,
-        #result-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        #result-screen {
-            display: none;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            font-size: 1.1rem;
-            color: var(--secondary-text-color);
-            margin-top: 0;
-        }
-        
-        .input-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            width: 100%;
-            margin-top: 2rem;
-        }
+        #app-container { width: 90%; max-width: 600px; padding: 20px; position: relative; }
+        #initial-screen, #result-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #result-screen { display: none; }
+        h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem; }
+        p { font-size: 1.1rem; color: var(--secondary-text-color); margin-top: 0; }
+        .input-container { display: flex; flex-direction: column; gap: 1rem; width: 100%; margin-top: 2rem; }
 
         #name-input {
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            color: var(--primary-text-color);
-            font-size: 1.2rem;
-            padding: 15px;
-            border-radius: 8px;
-            width: calc(100% - 32px); /* Corrected width for padding */
-            font-family: inherit;
-            transition: box-shadow 0.2s;
+            background-color: var(--input-bg); border: 1px solid var(--input-border); color: var(--primary-text-color); font-size: 1.2rem; padding: 15px; border-radius: 8px; width: calc(100% - 32px); font-family: inherit; transition: all 0.2s;
         }
-
-        #name-input:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-        }
-
-        .action-button {
-            background-color: var(--button-bg);
-            color: #fff;
-            border: none;
-            font-size: 1.2rem;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
+        #name-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); }
+        .action-button { background-color: var(--button-bg); color: #fff; border: none; font-size: 1.2rem; padding: 15px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: background-color 0.2s; }
+        .action-button:hover { background-color: var(--button-hover-bg); }
         
-        .action-button:hover {
-            background-color: var(--button-hover-bg);
-        }
+        #result-subject-name { font-size: 1.8rem; color: var(--secondary-text-color); margin-bottom: 0; font-weight: 700; }
+        #result-verdict { font-size: clamp(6rem, 25vw, 12rem); font-weight: 900; margin: -0.5rem 0; line-height: 1; text-transform: uppercase; }
+        .yes { color: var(--yes-color); } .no { color: var(--no-color); } .party { color: var(--party-color); }
+        #result-comment { font-size: 1.5rem; font-style: italic; margin-top: 0.5rem; max-width: 500px; }
         
-        #result-subject-name {
-            font-size: 1.8rem;
-            color: var(--secondary-text-color);
-            margin-bottom: 0;
-            font-weight: 700;
+        /* ИСПРАВЛЕНИЕ ДЛЯ БУКВЫ "Д" */
+        #result-verdict:lang(ru).yes {
+             margin-bottom: 10px;
         }
 
-        #result-verdict {
-            font-size: clamp(6rem, 25vw, 12rem);
-            font-weight: 900;
-            margin: -0.5rem 0;
-            line-height: 1;
-            text-transform: uppercase;
-        }
-
-        .yes { color: var(--yes-color); }
-        .no { color: var(--no-color); }
-        .party { color: var(--party-color); }
+        .lang-switcher, #back-to-hub, .footer, #secret-party-trigger { position: fixed; z-index: 100; }
+        .lang-switcher { top: 20px; right: 20px; }
+        .lang-switcher a { color: var(--secondary-text-color); text-decoration: none; margin: 0 5px; font-weight: 700; padding: 5px; border-bottom: 2px solid transparent; transition: all 0.2s; }
+        .lang-switcher a.active { color: var(--primary-text-color); border-bottom-color: var(--button-bg); }
+        #back-to-hub { top: 20px; left: 20px; color: var(--secondary-text-color); text-decoration: none; font-weight: 700; padding: 8px 12px; border-radius: 8px; background-color: rgba(255, 255, 255, 0.05); transition: all 0.2s; }
+        #back-to-hub:hover { background-color: rgba(255, 255, 255, 0.1); color: var(--primary-text-color); }
+        .footer { bottom: 20px; left: 50%; transform: translateX(-50%); }
+        #author-signature { color: var(--secondary-text-color); cursor: pointer; font-size: 0.9rem; padding: 5px 10px; transition: color 0.2s; }
+        #author-signature:hover { color: var(--primary-text-color); }
+        #links-popup { position: absolute; bottom: 120%; left: 50%; background-color: var(--input-bg); border: 1px solid var(--input-border); border-radius: 8px; padding: 10px; display: flex; flex-direction: column; gap: 10px; opacity: 0; visibility: hidden; transform: translate(-50%, 10px); transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s; }
+        #links-popup.visible { opacity: 1; visibility: visible; transform: translate(-50%, 0); transition-delay: 0s; }
+        #links-popup a { color: var(--primary-text-color); text-decoration: none; padding: 8px 15px; display: block; border-radius: 5px; transition: background-color 0.2s; white-space: nowrap; }
+        #links-popup a:hover { background-color: rgba(255, 255, 255, 0.1); }
         
-        #result-comment {
-            font-size: 1.5rem;
-            font-style: italic;
-            margin-top: 0.5rem;
-            max-width: 500px;
-        }
-
-        .lang-switcher, #back-to-hub, .footer, #secret-party-trigger {
-            position: fixed;
-            z-index: 100;
-        }
-        .lang-switcher {
-            top: 20px;
-            right: 20px;
-        }
-        .lang-switcher a {
-            color: var(--secondary-text-color);
-            text-decoration: none;
-            margin: 0 5px;
-            font-weight: 700;
-            padding: 5px;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        .lang-switcher a.active {
-            color: var(--primary-text-color);
-            border-bottom-color: var(--button-bg);
-        }
-        #back-to-hub {
-            top: 20px;
-            left: 20px;
-            color: var(--secondary-text-color);
-            text-decoration: none;
-            font-weight: 700;
-            padding: 8px 12px;
-            border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.05);
-            transition: all 0.2s;
-        }
-        #back-to-hub:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--primary-text-color);
-        }
-        .footer {
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        #author-signature {
-            color: var(--secondary-text-color);
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 5px 10px;
-            transition: color 0.2s;
-        }
-        #author-signature:hover {
-            color: var(--primary-text-color);
-        }
-        #links-popup {
-            position: absolute;
-            bottom: 120%;
-            left: 50%;
-            background-color: var(--input-bg);
-            border: 1px solid var(--input-border);
-            border-radius: 8px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translate(-50%, 10px);
-            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
-        }
-        #links-popup.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, 0);
-            transition-delay: 0s;
-        }
-        #links-popup a {
-            color: var(--primary-text-color);
-            text-decoration: none;
-            padding: 8px 15px;
-            display: block;
-            border-radius: 5px;
-            transition: background-color 0.2s;
-            white-space: nowrap;
-        }
-        #links-popup a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        #secret-party-trigger {
-            bottom: 25px;
-            left: 25px;
-            font-size: 2rem;
-            text-decoration: none;
-            opacity: 0;
-            visibility: hidden;
-            transform: scale(0.5);
-            transition: all 0.3s ease;
-        }
-        #secret-party-trigger.visible {
-            opacity: 0.5;
-            visibility: visible;
-            transform: scale(1);
-        }
-        #secret-party-trigger:hover {
-            opacity: 1;
-            transform: scale(1.1) rotate(-15deg);
-        }
+        #secret-party-trigger { bottom: 25px; left: 25px; font-size: 2rem; text-decoration: none; opacity: 0; visibility: hidden; transform: scale(0.5); transition: all 0.3s ease; }
+        #secret-party-trigger.visible { opacity: 0.5; visibility: visible; transform: scale(1); }
+        #secret-party-trigger:hover { opacity: 1; transform: scale(1.1) rotate(-15deg); }
     </style>
 </head>
 <body>
     <a href="https://infikot.github.io/" id="back-to-hub"></a>
-    
     <div id="app-container">
-        <div id="initial-screen">
-            <h1 id="title-text"></h1>
-            <p id="subtitle-text"></p>
-            <div class="input-container">
-                <input type="text" id="name-input">
-                <button class="action-button" id="check-button"></button>
-            </div>
-        </div>
-        
-        <div id="result-screen">
-            <p id="result-subject-name"></p>
-            <h2 id="result-verdict"></h2>
-            <p id="result-comment"></p>
-            <div class="input-container">
-                <button class="action-button" id="reset-button"></button>
-            </div>
-        </div>
+        <div id="initial-screen"> <h1 id="title-text"></h1> <p id="subtitle-text"></p> <div class="input-container"> <input type="text" id="name-input"> <button class="action-button" id="check-button"></button> </div> </div>
+        <div id="result-screen"> <p id="result-subject-name"></p> <h2 id="result-verdict"></h2> <p id="result-comment"></p> <div class="input-container"> <button class="action-button" id="reset-button"></button> </div> </div>
     </div>
-    
-    <div class="lang-switcher">
-        <a href="#" class="lang-btn" data-lang="ru">RU</a>
-        <a href="#" class="lang-btn" data-lang="en">EN</a>
-    </div>
-
-    <div class="footer">
-        <span id="author-signature">by infikot</span>
-        <div id="links-popup">
-            <a href="https://github.com/infikot/office-oracle/" target="_blank">GitHub</a>
-            <a href="https://t.me/infinite_edit" target="_blank">Telegram</a>
-        </div>
-    </div>
-    
+    <div class="lang-switcher"> <a href="#" class="lang-btn" data-lang="ru">RU</a> <a href="#" class="lang-btn" data-lang="en">EN</a> </div>
+    <div class="footer"> <span id="author-signature">by infikot</span> <div id="links-popup"> <a href="https://github.com/infikot/office-oracle/" target="_blank">GitHub</a> <a href="https://t.me/infinite_edit" target="_blank">Telegram</a> </div> </div>
     <a href="#" id="secret-party-trigger">🍻</a>
 
     <script>
@@ -294,80 +80,34 @@
             ru: {
                 title: "Офисный Оракул",
                 subtitle: "Узнай, кто на самом деле работает, а кто прокрастинирует.",
-                placeholder: "Введи имя или название команды...",
+                placeholder: "Чью продуктивность будем проверять?",
                 buttonCheck: "Проверить",
                 buttonReset: "Спросить ещё",
                 homeButton: "← На главную",
                 yes: "ДА",
                 no: "НЕТ",
-                yesPhrases: [
-                    "в наушниках, значит, в потоке.",
-                    "усердно кликает, создавая видимость бурной деятельности.",
-                    "заваривает уже третью кружку чая, верный признак работы.",
-                    "похоже, у него дедлайн горит.",
-                    "делает вид, что всё понимает.",
-                    "работает как стахановец. Подозрительно.",
-                    "игнорирует все сообщения."
-                ],
-                noPhrases: [
-                    "обновляет ленту новостей в поисках вдохновения.",
-                    "созерцает код, ожидая божественного озарения.",
-                    "ведет важные переговоры в курилке.",
-                    "открыл Figma и просто двигает квадратик.",
-                    "изучает очень важный pull request на YouTube.",
-                    "проходит важный этап — обед.",
-                    "медитирует над кодом. Или просто спит."
-                ],
+                yesPhrases: ["в наушниках, значит, в потоке.", "усердно кликает, создавая видимость бурной деятельности.", "заваривает уже третью кружку чая, верный признак работы.", "похоже, у него дедлайн горит.", "делает вид, что всё понимает.", "работает как стахановец. Подозрительно.", "игнорирует все сообщения."],
+                noPhrases: ["обновляет ленту новостей в поисках вдохновения.", "созерцает код, ожидая божественного озарения.", "ведет важные переговоры в курилке.", "открыл Figma и просто двигает квадратик.", "изучает очень важный pull request на YouTube.", "проходит важный этап — обед.", "медитирует над кодом. Или просто спит."],
+                partyPlaceholder: "Кто сегодня станет легендой?",
                 partyTitle: "ВРЕМЯ ПИТЬ ПИВО!",
                 partySubtitle: "Какая к чёрту работа?",
-                partyPlaceholder: "Кто главный по пицце?",
-                partyButtonCheck: "Кто здесь?!",
-                partyPhrases: [
-                    "уже разливает напитки!",
-                    "отвечает за плейлист!",
-                    "ищет ближайшую пиццерию!",
-                    "рассказывает анекдот!",
-                    "уже танцует на столе!"
-                ]
+                partyPhrases: ["уже разливает напитки!", "отвечает за плейлист!", "ищет ближайшую пиццерию!", "рассказывает анекдот!", "уже танцует на столе!"]
             },
             en: {
                 title: "The Office Oracle",
                 subtitle: "Find out who's actually working and who's procrastinating.",
-                placeholder: "Enter a name or a team...",
+                placeholder: "Whose productivity are we checking today?",
                 buttonCheck: "Check Status",
                 buttonReset: "Ask Again",
                 homeButton: "← Back to Hub",
                 yes: "YES",
                 no: "NO",
-                yesPhrases: [
-                    "has headphones on, must be in the zone.",
-                    "is clicking furiously, creating the illusion of progress.",
-                    "is on their third cup of coffee, a sure sign of work.",
-                    "seems to have a deadline on fire.",
-                    "is pretending to understand everything.",
-                    "is working like a machine. Suspicious.",
-                    "and ignoring all messages."
-                ],
-                noPhrases: [
-                    "is scrolling through news feeds for 'inspiration'.",
-                    "is contemplating the code, awaiting divine insight.",
-                    "is holding an important meeting in the smoking area.",
-                    "opened Figma and is just moving a square around.",
-                    "is reviewing a very important pull request on YouTube.",
-                    "is on a crucial mission called 'lunch'.",
-                    "is meditating on the code. Or just sleeping."
-                ],
+                yesPhrases: ["has headphones on, must be in the zone.", "is clicking furiously, creating the illusion of progress.", "is on their third cup of coffee, a sure sign of work.", "seems to have a deadline on fire.", "is pretending to understand everything.", "is working like a machine. Suspicious.", "and ignoring all messages."],
+                noPhrases: ["is scrolling through news feeds for 'inspiration'.", "is contemplating the code, awaiting divine insight.", "is holding an important meeting in the smoking area.", "opened Figma and is just moving a square around.", "is reviewing a very important pull request on YouTube.", "is on a crucial mission called 'lunch'.", "is meditating on the code. Or just sleeping."],
+                partyPlaceholder: "Who's about to become a legend?",
                 partyTitle: "IT'S BEER O'CLOCK!",
                 partySubtitle: "Who cares about work anyway?",
-                partyPlaceholder: "Who's ordering pizza?",
-                partyButtonCheck: "Who's In?!",
-                partyPhrases: [
-                    "is already pouring the drinks!",
-                    "is in charge of the playlist!",
-                    "is finding the nearest brewery!",
-                    "is telling a terrible joke!",
-                    "is already dancing on the table!"
-                ]
+                partyPhrases: ["is already pouring the drinks!", "is in charge of the playlist!", "is finding the nearest brewery!", "is telling a terrible joke!", "is already dancing on the table!"]
             }
         };
 
@@ -389,24 +129,21 @@
         const secretPartyTrigger = document.getElementById('secret-party-trigger');
 
         let currentLang = localStorage.getItem('preferredLang') || 'ru';
-        let currentMood = 'normal';
+        let isPartyModePrimed = false; // Новый флаг для подготовки режима "пива"
 
         function updateUI() {
             const texts = i18n[currentLang];
             document.documentElement.lang = currentLang;
 
-            if (currentMood === 'party') {
-                titleText.textContent = texts.partyTitle;
-                subtitleText.textContent = texts.partySubtitle;
+            titleText.textContent = texts.title;
+            subtitleText.textContent = texts.subtitle;
+            checkButton.textContent = texts.buttonCheck;
+            body.classList.remove('party-mode');
+
+            if (isPartyModePrimed) {
                 nameInput.placeholder = texts.partyPlaceholder;
-                checkButton.textContent = texts.partyButtonCheck;
-                body.classList.add('party-mode');
             } else {
-                titleText.textContent = texts.title;
-                subtitleText.textContent = texts.subtitle;
                 nameInput.placeholder = texts.placeholder;
-                checkButton.textContent = texts.buttonCheck;
-                body.classList.remove('party-mode');
             }
 
             resetButton.textContent = texts.buttonReset;
@@ -426,14 +163,16 @@
             if (!name) return;
 
             const texts = i18n[currentLang];
-            
             resultSubjectName.style.display = 'block';
             resultVerdict.style.display = 'block';
             secretPartyTrigger.classList.remove('visible');
 
-            if (currentMood === 'party') {
+            if (isPartyModePrimed) {
+                body.classList.add('party-mode');
+                titleText.textContent = texts.partyTitle;
+                subtitleText.textContent = texts.partySubtitle;
                 resultSubjectName.style.display = 'none';
-                resultVerdict.textContent = texts.partyTitle;
+                resultVerdict.textContent = texts.partyTitle; // Можно заменить на что-то другое
                 resultVerdict.className = 'party';
                 resultComment.textContent = `${name} ${getRandomElement(texts.partyPhrases)}`;
             } else {
@@ -448,32 +187,24 @@
         };
 
         function resetView() {
-            currentMood = 'normal';
+            isPartyModePrimed = false; // Сбрасываем режим
             resultScreen.style.display = 'none';
             initialScreen.style.display = 'flex';
             nameInput.value = '';
-            updateUI(); // Важно обновить UI после сброса
+            updateUI();
             nameInput.focus();
         };
         
-        // --- Event Listeners Setup ---
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('mood') === 'party') {
-            currentMood = 'party';
-        }
-        
+        // --- Event Listeners ---
         checkButton.addEventListener('click', checkStatus);
-        
         resetButton.addEventListener('click', resetView);
         
         nameInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                checkStatus();
-            }
+            if (e.key === 'Enter') checkStatus();
         });
 
         nameInput.addEventListener('input', () => {
-            if (nameInput.value.trim().length > 0) {
+            if (nameInput.value.trim().length > 0 && !isPartyModePrimed) {
                 secretPartyTrigger.classList.add('visible');
             } else {
                 secretPartyTrigger.classList.remove('visible');
@@ -482,9 +213,10 @@
 
         secretPartyTrigger.addEventListener('click', (e) => {
             e.preventDefault();
-            currentMood = 'party';
-            updateUI();
-            checkStatus(); // Сразу показываем результат вечеринки
+            isPartyModePrimed = true;
+            secretPartyTrigger.classList.remove('visible');
+            updateUI(); // Обновляем UI, чтобы сменился placeholder
+            nameInput.focus();
         });
 
         langButtons.forEach(btn => {
@@ -497,8 +229,7 @@
         });
         
         authorSignature.addEventListener('click', (e) => {
-            e.stopPropagation();
-            linksPopup.classList.toggle('visible');
+            e.stopPropagation(); linksPopup.classList.toggle('visible');
         });
 
         document.addEventListener('click', (e) => {
@@ -507,7 +238,6 @@
             }
         });
         
-        // --- Initial Call ---
         updateUI();
         nameInput.focus();
     </script>
