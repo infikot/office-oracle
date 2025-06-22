@@ -178,10 +178,29 @@
         #links-popup a:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+	    
+        #back-to-hub {
+    	    position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s;
+            z-index: 100;
+        }
+
+        #back-to-hub:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--primary-text-color);
+        }
     </style>
 </head>
 <body>
-
+    <a href="https://infikot.github.io/" id="back-to-hub">← На главную</a>
     <div id="app-container">
         <div id="initial-screen">
             <h1 id="title-text"></h1>
