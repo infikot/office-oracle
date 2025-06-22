@@ -33,27 +33,10 @@
         .action-button { background-color: var(--button-bg); color: #fff; border: none; font-size: 1.2rem; padding: 15px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: background-color 0.2s; }
         .action-button:hover { background-color: var(--button-hover-bg); }
         
-        /* --- ИЗМЕНЕНИЯ В CSS --- */
-        #result-subject-name {
-            font-size: 1.8rem;
-            color: var(--secondary-text-color);
-            margin-bottom: 0;
-            font-weight: 700;
-        }
-        #result-verdict {
-            font-size: clamp(6rem, 25vw, 12rem);
-            font-weight: 900;
-            margin: -0.5rem 0; /* Уменьшаем вертикальные отступы для плотности */
-            line-height: 1;
-            text-transform: uppercase;
-        }
+        #result-subject-name { font-size: 1.8rem; color: var(--secondary-text-color); margin-bottom: 0; font-weight: 700; }
+        #result-verdict { font-size: clamp(6rem, 25vw, 12rem); font-weight: 900; margin: -0.5rem 0; line-height: 1; text-transform: uppercase; }
         .yes { color: var(--yes-color); } .no { color: var(--no-color); } .party { color: var(--party-color); }
-        #result-comment {
-            font-size: 1.5rem;
-            font-style: italic;
-            margin-top: 0.5rem;
-            max-width: 500px;
-        }
+        #result-comment { font-size: 1.5rem; font-style: italic; margin-top: 0.5rem; max-width: 500px; }
 
         .lang-switcher, #back-to-hub, .footer { position: fixed; z-index: 100; }
         .lang-switcher { top: 20px; right: 20px; }
@@ -82,7 +65,6 @@
             </div>
         </div>
         
-        <!-- --- ИЗМЕНЕНИЯ В HTML --- -->
         <div id="result-screen">
             <p id="result-subject-name"></p>
             <h2 id="result-verdict"></h2>
@@ -105,7 +87,7 @@
     </div>
 
     <script>
-        const i18n = { // Фразы не менялись, они и так идеальны для нового формата
+        const i18n = {
             ru: {
                 title: "Офисный Оракул", subtitle: "Узнай, кто на самом деле работает, а кто прокрастинирует.", placeholder: "Введи имя или название команды...", buttonCheck: "Проверить", buttonReset: "Спросить ещё", homeButton: "← На главную", yes: "ДА", no: "НЕТ",
                 yesPhrases: [ "но выглядит уставшим.", "и даже закрыл вкладку с YouTube.", "но кофе скоро закончится.", "игнорирует все сообщения.", "по крайней мере, его курсор движется.", "работает как стахановец. Подозрительно.", "делает вид, что всё понимает." ],
@@ -120,33 +102,38 @@
             }
         };
 
-        const initialScreen = document.getElementById('initial-screen'), resultScreen = document.getElementById('result-screen'), nameInput = document.getElementById('name-input'), checkButton = document.getElementById('check-button'), resetButton = document.getElementById('reset-button'), titleText = document.getElementById('title-text'), subtitleText = document.getElementById('subtitle-text'), resultVerdict = document.getElementById('result-verdict'), resultComment = document.getElementById('result-comment'), langButtons = document.querySelectorAll('.lang-btn'), body = document.body, authorSignature = document.getElementById('author-signature'), linksPopup = document.getElementById('links-popup'), backToHubButton = document.getElementById('back-to-hub'),
-        resultSubjectName = document.getElementById('result-subject-name'); // --- ДОБАВЛЕН НОВЫЙ ЭЛЕМЕНТ ---
+        const initialScreen = document.getElementById('initial-screen'), resultScreen = document.getElementById('result-screen'), nameInput = document.getElementById('name-input'), checkButton = document.getElementById('check-button'), resetButton = document.getElementById('reset-button'), titleText = document.getElementById('title-text'), subtitleText = document.getElementById('subtitle-text'), resultVerdict = document.getElementById('result-verdict'), resultComment = document.getElementById('result-comment'), langButtons = document.querySelectorAll('.lang-btn'), body = document.body, authorSignature = document.getElementById('author-signature'), linksPopup = document.getElementById('links-popup'), backToHubButton = document.getElementById('back-to-hub'), resultSubjectName = document.getElementById('result-subject-name');
         
         let currentLang = localStorage.getItem('preferredLang') || 'ru';
         let currentMood = 'normal';
 
-        const updateUI = () => { /* ... код без изменений ... */ };
-        const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        const updateUI = () => {
+            const texts = i18n[currentLang]; document.documentElement.lang = currentLang;
+            if (currentMood === 'party') {
+                titleText.textContent = texts.partyTitle; subtitleText.textContent = texts.partySubtitle; nameInput.placeholder = texts.partyPlaceholder; checkButton.textContent = texts.partyButtonCheck; body.classList.add('party-mode');
+            } else {
+                titleText.textContent = texts.title; subtitleText.textContent = texts.subtitle; nameInput.placeholder = texts.placeholder; checkButton.textContent = texts.buttonCheck; body.classList.remove('party-mode');
+            }
+            resetButton.textContent = texts.buttonReset; backToHubButton.textContent = texts.homeButton;
+            langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
+        };
         
-        // --- ГЛАВНЫЕ ИЗМЕНЕНИЯ В JAVASCRIPT ---
+        const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
         const checkStatus = () => {
             const name = nameInput.value.trim(); if (!name) return;
             const texts = i18n[currentLang];
             
-            // Показываем все элементы для обычного режима
             resultSubjectName.style.display = 'block';
             resultVerdict.style.display = 'block';
 
             if(currentMood === 'party') {
-                // В режиме вечеринки скрываем имя и делаем главным вердиктом название режима
                 resultSubjectName.style.display = 'none';
                 resultVerdict.textContent = texts.partyTitle;
                 resultVerdict.className = 'party';
                 resultComment.textContent = `${name} ${getRandomElement(texts.partyPhrases)}`;
             } else {
                 const isWorking = Math.random() > 0.5;
-                // Заполняем новые три поля по отдельности
                 resultSubjectName.textContent = `${name}..`;
                 resultVerdict.textContent = isWorking ? texts.yes : texts.no;
                 resultVerdict.className = isWorking ? 'yes' : 'no';
@@ -157,34 +144,22 @@
 
         const resetView = () => { resultScreen.style.display = 'none'; initialScreen.style.display = 'flex'; nameInput.value = ''; nameInput.focus(); };
 
-        // --- Весь остальной код скрипта остается без изменений ---
-        // (слушатели, инициализация и т.д.)
-
         const urlParams = new URLSearchParams(window.location.search); if (urlParams.get('mood') === 'party') { currentMood = 'party'; }
+        
         checkButton.addEventListener('click', checkStatus);
         resetButton.addEventListener('click', resetView);
         nameInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') checkStatus(); });
+
         langButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                e.preventDefault(); currentLang = e.target.dataset.lang;
+                e.preventDefault(); 
+                currentLang = e.target.dataset.lang;
                 localStorage.setItem('preferredLang', currentLang);
                 updateUI();
             });
         });
         authorSignature.addEventListener('click', (e) => { e.stopPropagation(); linksPopup.classList.toggle('visible'); });
         document.addEventListener('click', (e) => { if (!linksPopup.contains(e.target) && !authorSignature.contains(e.target)) linksPopup.classList.remove('visible'); });
-        
-        // Перенёс объявление функции updateUI выше, чтобы код был чище
-        Object.assign(updateUI, () => {
-            const texts = i18n[currentLang]; document.documentElement.lang = currentLang;
-            if (currentMood === 'party') {
-                titleText.textContent = texts.partyTitle; subtitleText.textContent = texts.partySubtitle; nameInput.placeholder = texts.partyPlaceholder; checkButton.textContent = texts.partyButtonCheck; body.classList.add('party-mode');
-            } else {
-                titleText.textContent = texts.title; subtitleText.textContent = texts.subtitle; nameInput.placeholder = texts.placeholder; checkButton.textContent = texts.buttonCheck; body.classList.remove('party-mode');
-            }
-            resetButton.textContent = texts.buttonReset; backToHubButton.textContent = texts.homeButton;
-            langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === currentLang));
-        })
         
         updateUI();
         nameInput.focus();
